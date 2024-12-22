@@ -59,6 +59,12 @@
             color: #aaa;
         }
 
+        .message-box img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
         /* Input Box (Text Box) */
         .input-box {
             position: fixed;
@@ -202,7 +208,7 @@
                             
                             // Check if there is an image and add it to the message
                             if (response.messages[key].image) {
-                                temp += "<br><img src='" + response.messages[key].image + "' style='max-width: 200px; max-height: 200px;'/>";
+                                temp += "<br><img src='" + response.messages[key].image + "' alt='User upload' class='message-image'/>";
                             }
                             
                             temp += "</div>";

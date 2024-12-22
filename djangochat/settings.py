@@ -126,8 +126,7 @@ STATICFILES_DIRS = [
 ]
 
 # Media files (optional, if you upload user-generated files)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
 import os
 
 MEDIA_URL = '/media/'  # URL to access uploaded media files in the browser
@@ -136,5 +135,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory where media files will
 # Production settings (only if deploying to production)
 if not DEBUG:
     STATIC_ROOT = BASE_DIR / 'staticfiles'  # Where static files are collected
+
 
 
