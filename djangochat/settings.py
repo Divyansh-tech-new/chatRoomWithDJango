@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chat'
+    'chat',  # Your app name
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'djangochat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # Path for custom templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,3 +119,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Additional static files settings
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Directory for your static assets (logo, CSS, JS)
+]
+
+# Media files (optional, if you upload user-generated files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Production settings (only if deploying to production)
+if not DEBUG:
+    STATIC_ROOT = BASE_DIR / 'staticfiles'  # Where static files are collected
