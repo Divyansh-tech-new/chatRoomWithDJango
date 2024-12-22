@@ -1,4 +1,4 @@
-<h1>Simple ChatRoom</h1>
+<h1>Simple Anonymous ChatRooms With Image Sharing </h1>
 
 <p>A real-time chat application built with <strong>Django</strong> and <strong>JavaScript</strong> that allows users to communicate in specific chat rooms of their choice. Users can chat with others across multiple locations in real-time.</p>
 
@@ -16,7 +16,7 @@
 <h2>Tech Stack</h2>
 <ul>
   <li><strong>Backend:</strong> Django</li>
-  <li><strong>Frontend:</strong> Not much done </li>
+  <li><strong>Frontend:</strong> Little Bit done with Html , CSS ,Bootstrap and little bit JS </li>
 </ul>
 
 <hr>
@@ -55,7 +55,6 @@ cd simple-chatroom
   <li>Add user authentication.</li>
   <li>Enhance UI/UX for a better experience.</li>
   <li>Store chat history in the database.</li>
-  <li>Add support for media (images, files, etc.).</li>
 </ul>
 
 <hr>
