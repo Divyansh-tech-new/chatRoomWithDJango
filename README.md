@@ -64,6 +64,3 @@ cd simple-chatroom
 <p>Contributions are welcome! Feel free to fork this repository and submit a pull request.</p>
 
 <hr>
-
-<h2>License</h2>
-<p>This project is licensed under the <a href="LICENSE">MIT License</a>.</p>
