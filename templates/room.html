@@ -29,10 +29,10 @@
             padding: 20px;
             border-radius: 10px;
             margin-top: 20px;
-            height: calc(100vh - 200px); /* Make the chat container fill most of the page */
+            height: calc(100vh - 200px);
             overflow-y: auto;
-            width: 80%; /* Set chat box width to 80% */
-            max-width: 80%; /* Ensures the chat box doesn't stretch too wide on larger screens */
+            width: 80%;
+            max-width: 80%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -63,7 +63,7 @@
         .input-box {
             position: fixed;
             bottom: 20px;
-            width: 80%; /* Set input box width to 80% */
+            width: 80%;
             max-width: 80%;
             padding: 10px;
             background-color: rgba(255, 255, 255, 0.1);
@@ -71,6 +71,7 @@
             border-radius: 10px;
             margin: 0 auto;
             display: flex;
+            align-items: center; /* Ensures the input and file button are aligned */
         }
 
         .input-box input[type="text"] {
@@ -78,6 +79,10 @@
             padding: 12px;
             border-radius: 5px;
             border: none;
+            margin-right: 10px;
+        }
+
+        .input-box input[type="file"] {
             margin-right: 10px;
         }
 
@@ -95,6 +100,7 @@
             background-color: #45a049;
         }
 
+        /* Footer */
         .footer {
             background-color: #ffffff;
             color: #000;
@@ -106,7 +112,7 @@
             width: 100%;
         }
 
-        /* Popular Rooms (No Box) */
+        /* Popular Rooms Section */
         .popular-rooms {
             background-color: transparent;
             color: black;
@@ -133,21 +139,6 @@
             border-radius: 5px;
             font-size: 1.1rem;
         }
-
-        /* Flexbox Centering */
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .row {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
     </style>
 </head>
 <body>
@@ -166,7 +157,7 @@
             </div>
         </div>
 
-        <!-- Popular Rooms Section (Non-Boxed) -->
+        <!-- Popular Rooms Section -->
         <div class="popular-rooms">
             <h4>Popular Rooms</h4>
             <ul>
@@ -179,11 +170,13 @@
 
         <!-- Chat Input Box -->
         <div class="input-box">
-            <form id="post-form" style="width: 100%;">
+            <form id="post-form" enctype="multipart/form-data" style="width: 100%;">
                 {% csrf_token %}
                 <input type="hidden" name="username" id="username" value="{{username}}">
                 <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}">
                 <input type="text" name="message" id="message" placeholder="Type a message..." required>
+                <!-- Image Upload Button -->
+                <input type="file" name="image" id="image" accept="image/*">
                 <input type="submit" value="Send">
             </form>
         </div>
@@ -205,7 +198,14 @@
                     success: function(response){
                         $("#display").empty();
                         for (var key in response.messages) {
-                            var temp = "<div class='message-box'><b>" + response.messages[key].user + "</b><p>" + response.messages[key].value + "</p><span class='time'>" + response.messages[key].date + "</span></div>";
+                            var temp = "<div class='message-box'><b>" + response.messages[key].user + "</b><p>" + response.messages[key].value + "</p><span class='time'>" + response.messages[key].date + "</span>";
+                            
+                            // Check if there is an image and add it to the message
+                            if (response.messages[key].image) {
+                                temp += "<br><img src='" + response.messages[key].image + "' style='max-width: 200px; max-height: 200px;'/>";
+                            }
+                            
+                            temp += "</div>";
                             $("#display").append(temp);
                         }
                     },
@@ -218,20 +218,21 @@
             $(document).on('submit','#post-form', function(e){
                 e.preventDefault();
 
+                var formData = new FormData(this); // Create a FormData object from the form
+
                 $.ajax({
                     type: 'POST',
                     url: '/send',
-                    data: {
-                        username: $('#username').val(),
-                        room_id: $('#room_id').val(),
-                        message: $('#message').val(),
-                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-                    },
+                    data: formData,
+                    processData: false, // Important for sending file data
+                    contentType: false, // Important for sending file data
                     success: function(data){
                         // Message sent successfully
                     }
                 });
+
                 $('#message').val(''); // Clear the input field after sending the message
+                $('#image').val('');   // Clear the image input field
             });
         });
     </script>
