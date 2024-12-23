@@ -1,7 +1,7 @@
 <h1>Simple Anonymous ChatRooms With Image Sharing </h1>
 
 <p>A real-time chat application built with <strong>Django</strong> and <strong>JavaScript</strong> that allows users to communicate in specific chat rooms of their choice. Users can chat with others across multiple locations in real-time.</p>
-
+<h1>Also adding AI Chat summary using API..........under work currently</h1>
 <hr>
 
 <h2>Features</h2>
